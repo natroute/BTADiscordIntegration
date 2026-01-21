@@ -59,7 +59,11 @@ public class DiscordChatRelay {
         try {
             WebhookMessageBuilder builder = new WebhookMessageBuilder();
             builder.setUsername(author);
-            builder.setAvatarUrl("https://www.mc-heads.net/head/" + author + "/" + "150");
+            builder.setAvatarUrl(
+                    author.equals("<console>") ?
+                            config.discord_serverpfp_url :
+                            "https://www.mc-heads.net/head/" + author + "/" + "150"
+            );
             builder.setContent(message);
             webhookClient.send(builder.build());
         } catch (Throwable t) {
